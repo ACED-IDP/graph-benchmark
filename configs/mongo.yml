@@ -1,0 +1,10 @@
+Default: mongo
+
+Server:
+  HTTPPort: 8011
+  RPCPort: 8021
+
+Drivers:
+  mongo:
+    MongoDB:
+      URL: mongodb://localhost:27017

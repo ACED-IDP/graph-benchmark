@@ -1,0 +1,23 @@
+
+servers:
+  mongo:
+    config: configs/mongo.yml
+    host: http://localhost:8011
+    rpc: localhost:8021
+    graph: aced
+  pebble:
+    config: configs/pebble.yml
+    host: http://localhost:8010
+    rpc: localhost:8020
+    graph: aced
+
+queries:
+  patient_count: |
+    G.query().V().hasLabel("Patient").count()
+  patient_race_snv: |
+    G.query().V().hasLabel('Patient').as_("patient").
+    unwind("extension").unwind("extension.extension").
+    has(gripql.eq("extension.extension.valueCoding.display", "Black or African American")).
+    as_("patient").out("document_reference").
+    as_("doc").unwind("category").
+    unwind("category.coding").has(gripql.eq("category.coding.code", "Simple Nucleotide Variation"))

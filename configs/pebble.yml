@@ -1,0 +1,9 @@
+Default: pebble
+
+Server:
+  HTTPPort: 8010
+  RPCPort: 8020
+
+Drivers:
+  pebble:
+    Pebble: grip-pebble.db
